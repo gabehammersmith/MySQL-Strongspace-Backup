@@ -1,0 +1,25 @@
+A simple bash script I created to backup MySQL databases to Strongspace. 
+It makes use of Keychain so that a passphrase protected key may be used in 
+automated backups.
+
+
+!!!!!!!!!!!!!!!!! WARNING !!!!!!!!!!!!!!!!!
+!!!					!!!	
+!!!	THIS SCRIPT DELETES FILES	!!!
+!!!					!!!
+!!!!!!!!!!!!!!!!! WARNING !!!!!!!!!!!!!!!!!
+
+
+mysql_backup.sh uses rsync's --delete-after flag. If you don't know what that 
+means, you should read the rsync man page before attempting to use this script.
+
+I run it from CRON. Daily backups are stored for two weeks. On the first of 
+every month, the backup is archived and stored for one year. If mysqldump fails,
+an e-mail is sent. The same happens if rsync fails. 
+
+More info:
+http://www.funtoo.org/wiki/Keychain 
+https://www.strongspace.com/
+
+Original idea:
+https://www.strongspace.com/help/automated-offsite-mysql-backup
