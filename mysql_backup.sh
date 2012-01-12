@@ -15,7 +15,7 @@ ARCHIVE_DIR="$BACKUP_DIR/archive"
 
 #Strongspace Variables
 STRONGSPACE_USERNAME="username"
-STRONGSPACE_PATH="/strongspace/${STRONGSPACE_USERNAME}/home/${HOSTNAME}/mysql_backup"
+STRONGSPACE_PATH="/strongspace/${STRONGSPACE_USERNAME}/home/${HOSTNAME}"
 
 #Temporary files
 BODY="/tmp/mysqlbackup.fail"
