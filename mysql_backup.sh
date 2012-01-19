@@ -46,10 +46,10 @@ else
 	fi
 
 #Remove backups that are more than 2 weeks old.
-find ${BACKUP_DIR} -mtime +14 -exec rm {} \;
+find ${BACKUP_DIR} -mtime +14 -name '*.sql.gz' -type f -exec rm '{}' +
 
 #Remove backups from the archive that are more than 1 year old.
-find ${ARCHIVE_DIR} -mtime +365 -exec rm {} \;
+find ${ARCHIVE_DIR} -mtime +365 -name '*.sql.gz' -type f -exec rm '{}' +
 
 #Push the backup to Strongspace. Send an e-mail it fails.
 	rsync -a --delete-after ${BACKUP_DIR} ${STRONGSPACE_USERNAME}@${STRONGSPACE_USERNAME}.strongspace.com:${STRONGSPACE_PATH} 
