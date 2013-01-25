@@ -46,7 +46,7 @@ else
 	fi
 
 #Remove backups that are more than 2 weeks old.
-find ${BACKUP_DIR} -mtime +14 -name '*.sql.gz' -type f -exec rm '{}' +
+find ${BACKUP_DIR} -maxdepth 1 -mtime +14 -name '*.sql.gz' -type f -exec rm '{}' +
 
 #Remove backups from the archive that are more than 1 year old.
 find ${ARCHIVE_DIR} -mtime +365 -name '*.sql.gz' -type f -exec rm '{}' +
