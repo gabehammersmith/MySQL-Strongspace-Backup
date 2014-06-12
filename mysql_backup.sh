@@ -8,6 +8,7 @@ TO="you@yourdomain.com"
 MYSQL_USERNAME="backup-user"
 MYSQL_PASSWORD="your_password123"
 MYSQL_DATABASE="database_name" #use --all-databases to backup all databases.
+MYSQL_HOST="localhost"
 
 #Local Backup Directories
 BACKUP_DIR="$HOME/mysql_backup"
@@ -28,7 +29,7 @@ TODAY="`date +%0e`"
 source $HOME/.keychain/${HOSTNAME}-sh
 
 #Do the backup. Send an e-mail and exit if mysqldump fails.
-mysqldump --user=${MYSQL_USERNAME} --password=${MYSQL_PASSWORD} ${MYSQL_DATABASE} 2>$ERROR | gzip > "${BACKUP_DIR}/${HOSTNAME}-`date +%F-%H%M`.sql.gz"
+mysqldump --host=${MYSQL_HOST} --user=${MYSQL_USERNAME} --password=${MYSQL_PASSWORD} ${MYSQL_DATABASE} 2>$ERROR | gzip > "${BACKUP_DIR}/${HOSTNAME}-`date +%F-%H%M`.sql.gz"
 
 if      [ ${PIPESTATUS[0]} -ne "0" ]; 
 then
