@@ -28,8 +28,15 @@ TODAY="`date +%0e`"
 #Load the ssh-agent environment for Keychain.
 source $HOME/.keychain/${HOSTNAME}-sh
 
+if [ -f ${BACKUP_DIR}/latest.sql.gz ]
+then
+    rm -rf ${BACKUP_DIR}/latest.sql.gz
+fi
+
 #Do the backup. Send an e-mail and exit if mysqldump fails.
-mysqldump --host=${MYSQL_HOST} --user=${MYSQL_USERNAME} --password=${MYSQL_PASSWORD} ${MYSQL_DATABASE} 2>$ERROR | gzip > "${BACKUP_DIR}/${HOSTNAME}-`date +%F-%H%M`.sql.gz"
+mysqldump --host=${MYSQL_HOST} --user=${MYSQL_USERNAME} --password=${MYSQL_PASSWORD} ${MYSQL_DATABASE} 2>$ERROR | gzip > ${BACKUP_DIR}/latest.sql.gz
+
+cp ${BACKUP_DIR}/latest.sql.gz ${BACKUP_DIR}/${HOSTNAME}-`date +%F-%H%M`.sql.gz
 
 if      [ ${PIPESTATUS[0]} -ne "0" ]; 
 then
